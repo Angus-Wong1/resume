@@ -1,0 +1,267 @@
+\documentclass[10pt, letterpaper]{article}
+
+% Packages:
+\usepackage[
+    ignoreheadfoot, % set margins without considering header and footer
+    top=1.5 cm, % seperation between body and page edge from the top
+    bottom=1 cm, % seperation between body and page edge from the bottom
+    left=1.5 cm, % seperation between body and page edge from the left
+    right=1.5 cm, % seperation between body and page edge from the right
+    footskip=1.0 cm, % seperation between body and footer
+    % showframe % for debugging
+]{geometry} % for adjusting page geometry
+\usepackage{titlesec} % for customizing section titles
+\usepackage{tabularx} % for making tables with fixed width columns
+\usepackage{array} % tabularx requires this
+\usepackage[dvipsnames]{xcolor} % for coloring text
+\definecolor{primaryColor}{RGB}{0, 0, 0} % define primary color
+\usepackage{enumitem} % for customizing lists
+\usepackage{amsmath} % for math
+\usepackage[
+    pdftitle={Angus Wong's CV},
+    pdfauthor={Angus Wong},
+    pdfcreator={LaTeX with RenderCV},
+    colorlinks=true,
+    urlcolor=primaryColor
+]{hyperref} % for links, metadata and bookmarks
+\usepackage[pscoord]{eso-pic} % for floating text on the page
+\usepackage{calc} % for calculating lengths
+\usepackage{bookmark} % for bookmarks
+\usepackage{lastpage} % for getting the total number of pages
+\usepackage{changepage} % for one column entries (adjustwidth environment)
+\usepackage{paracol} % for two and three column entries
+\usepackage{ifthen} % for conditional statements
+\usepackage{needspace} % for avoiding page brake right after the section title
+\usepackage{iftex} % check if engine is pdflatex, xetex or luatex
+
+% Ensure that generate pdf is machine readable/ATS parsable:
+\ifPDFTeX
+    \input{glyphtounicode}
+    \pdfgentounicode=1
+    \usepackage[T1]{fontenc}
+    \usepackage[utf8]{inputenc}
+    \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{} % load only if available; charter overrides the body font anyway
+\fi
+
+\usepackage{charter}
+
+% Some settings:
+\raggedright
+\AtBeginEnvironment{adjustwidth}{\partopsep0pt} % remove space before adjustwidth environment
+\pagestyle{empty} % no header or footer
+\setcounter{secnumdepth}{0} % no section numbering
+\setlength{\parindent}{0pt} % no indentation
+\setlength{\topskip}{0pt} % no top skip
+\setlength{\columnsep}{0.15cm} % set column seperation
+\pagenumbering{gobble} % no page numbering
+
+\titleformat{\section}{\needspace{4\baselineskip}\bfseries\large}{}{0pt}{}[\vspace{1pt}\titlerule]
+
+\titlespacing{\section}{
+    % left space:
+    -.3pt
+}{
+    % top space:
+    0.3 cm
+}{
+    % bottom space:
+    0.2 cm
+} % section title spacing
+
+\renewcommand\labelitemi{$\vcenter{\hbox{\small$\bullet$}}$} % custom bullet points
+\newenvironment{highlights}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=0 cm + 10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights
+
+
+\newenvironment{highlightsforbulletentries}{
+    \begin{itemize}[
+        topsep=0.10 cm,
+        parsep=0.10 cm,
+        partopsep=0pt,
+        itemsep=0pt,
+        leftmargin=10pt
+    ]
+}{
+    \end{itemize}
+} % new environment for highlights for bullet entries
+
+\newenvironment{onecolentry}{
+    \begin{adjustwidth}{
+        0 cm + 0.00001 cm
+    }{
+        0 cm + 0.00001 cm
+    }
+}{
+    \end{adjustwidth}
+} % new environment for one column entries
+
+\newenvironment{twocolentry}[2][]{
+    \onecolentry
+    \def\secondColumn{#2}
+    \setcolumnwidth{\fill, 3.4 cm}
+    \begin{paracol}{2}
+}{
+    \switchcolumn \raggedleft \secondColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for two column entries
+
+\newenvironment{threecolentry}[3][]{
+    \onecolentry
+    \def\thirdColumn{#3}
+    \setcolumnwidth{, \fill, 2.5 cm}
+    \begin{paracol}{3}
+    {\raggedright #2} \switchcolumn
+}{
+    \switchcolumn \raggedleft \thirdColumn
+    \end{paracol}
+    \endonecolentry
+} % new environment for three column entries
+
+\newenvironment{header}{
+    \setlength{\topsep}{0pt}\par\kern\topsep\centering\linespread{1.5}
+}{
+    \par\kern\topsep
+} % new environment for the header
+
+% save the original href command in a new command:
+\let\hrefWithoutArrow\href
+
+
+\begin{document}
+    \newcommand{\AND}{\unskip
+        \cleaders\copy\ANDbox\hskip\wd\ANDbox
+        \ignorespaces
+    }
+    \newsavebox\ANDbox
+    \sbox\ANDbox{$|$}
+
+    \begin{header}
+        \fontsize{12 pt}{12 pt}\selectfont Angus Wong
+
+        \vspace{2 pt}
+
+        \normalsize
+        \mbox{Birmingham, AL}%
+        \kern 4.0 pt%
+        \AND%
+        \kern 4.0 pt%
+        \mbox{\hrefWithoutArrow{mailto:anguswong300@gmail.com}{anguswong300@gmail.com}}%
+        \kern 4.0 pt%
+        \AND%
+        \kern 4.0 pt%
+        \mbox{\hrefWithoutArrow{tel:+1-205-613-6574}{(205)-613-6574}}%
+        \kern 4.0 pt%
+        \AND%
+        \kern 4.0 pt%
+        \mbox{\hrefWithoutArrow{https://www.linkedin.com/in/angus-w-b78a301a0/}{linkedin.com/in/angus-wong}}%
+        \kern 4.0 pt%
+        \AND%
+        \kern 4.0 pt%
+        \mbox{\hrefWithoutArrow{https://github.com/Angus-Wong1}{github.com/Angus-Wong1}}%
+    \end{header}
+
+    \vspace{4 pt - 0.3 cm}
+
+
+    \section{Experience}
+        \begin{twocolentry}{
+            May 2025 -- Present
+        }
+\textbf{Senior Software Engineer — ML \& data platforms }, WTG Energy -- Dallas, TX
+\end{twocolentry}
+\begin{onecolentry}
+\begin{highlights}
+    \item Built a \textbf{RAG} application over land and parcel data on \textbf{PostgreSQL}/\textbf{pgvector}, geolocating results with \textbf{ESRI ArcGIS}/\textbf{ArcPy} for natural-language parcel search on interactive maps, cutting time-to-GTM by \textbf{40\%}.
+    \item Developed a \textbf{RAG} pipeline over CRM data, chunking and embedding call transcripts and emails into \textbf{pgvector} with \textbf{hybrid search} (BM25 + dense retrieval) to surface account history and deal context, lifting conversion rate by \textbf{30\%}.
+    \item Engineered a \textbf{RAG} assistant for the internal IT ticketing system that retrieves relevant wiki articles, auto-resolves routine requests under \textbf{human-in-the-loop} review, and escalates complex tickets to technicians.
+    \item Designed an \textbf{LLM-powered} internal platform for natural-language querying of operational and telemetry data, improving GTM pipeline velocity by \textbf{60\%}.
+    \item Developed \textbf{Python} APIs serving \textbf{LangChain}/\textbf{LangGraph} agentic workflows with tool calling and retrieval-augmented generation over internal data.
+    \item Built \textbf{Model Context Protocol (MCP)} servers exposing \textbf{Snowflake}, \textbf{Jira}/Confluence, and the land-parcel, CRM, and IT-ticket \textbf{RAG} services as tools for LLM agents, enabling natural-language access to operational data.
+    \item Streamed real-time \textbf{SCADA/IoT} telemetry through \textbf{Kafka} pipelines, feeding downstream analytics and near real-time asset monitoring.
+    \item Administered the \textbf{Azure} environment, using \textbf{Key Vault} to secure credentials across pipelines and deployed services.
+    \item Built a \textbf{multiclass classification} pipeline on \textbf{Databricks} using \textbf{Tesseract OCR} and prompt-chained LLM extraction for insurance claim evidence, achieving \textbf{0.89 macro-F1} across \textbf{80} categories.
+    \item Deployed a \textbf{PyTorch OCR/NLP} inference service with \textbf{FastAPI} and \textbf{Polars}, cutting manual asset-verification costs by \textbf{48\%}.
+    \item Managed distributed pipelines in \textbf{Python}, \textbf{Kafka}, and \textbf{Snowflake} for terabyte-scale telemetry ingestion and processing.
+    \item Orchestrated \textbf{Airflow} DAGs automating daily ingestion and transformation of IoT telemetry.
+    \item Engineered \textbf{CI/CD/CT} pipelines in \textbf{GitHub Actions} and \textbf{Azure DevOps}, automating linting, testing, container builds, and deployments.
+\end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+\begin{twocolentry}{
+    Sep 2023 -- May 2025
+}
+    \textbf{Software Engineer}, Southern Company -- Birmingham, AL
+\end{twocolentry}
+
+\begin{onecolentry}
+    \begin{highlights}
+        \item Created large-scale ingestion pipelines in \textbf{Python}, \textbf{Spark}, and \textbf{Databricks}, processing terabytes of IoT and operational data for analytics and forecasting.
+        \item Implemented end-to-end \textbf{Azure DevOps} pipelines for ETL orchestration, testing, and deployment, reducing deployment time by 70\%.
+        \item Built an internal \textbf{FastAPI} service (\textbf{Gunicorn} + \textbf{Uvicorn} workers) exposing async endpoints to trigger and monitor data ingestion, validation, and transformation jobs.
+        \item Integrated \textbf{ArcGIS} and \textbf{ArcPy} for spatial data analysis and automation, leveraging ESRI tools for geospatial processing and visualization within the data pipelines.
+        \item Built \textbf{ArcPy} automation scripts for batch geoprocessing, feature-class maintenance, and scheduled map production, reducing manual GIS work and standardizing spatial outputs across the data pipelines.
+
+    \end{highlights}
+\end{onecolentry}
+
+\vspace{0.2 cm}
+
+        \begin{twocolentry}{
+            Sep 2022 -- Sep 2023
+        }
+\textbf{Software Engineer}, AGC Automotive
+\end{twocolentry}
+\begin{onecolentry}
+\begin{highlights}
+    \item Owned a green-field project using  and \textbf{PostgreSQL} to monitor and improve operational efficiency of assembly lines. % TODO: technology name missing before "and"
+    \item Enhanced data efficiency by 50\% through a \textbf{Python}-based automation application for data processing and analysis.
+\end{highlights}
+
+\end{onecolentry}
+\vspace{0.2 cm}
+
+        \begin{twocolentry}{
+            Jun 2021 -- Sep 2022
+        }
+
+
+\textbf{Data Engineer / DevOps }, Diversified Energy -- Remote
+\end{twocolentry}
+\begin{onecolentry}
+    \begin{highlights}
+        \item Built high-volume telemetry ingestion pipelines with \textbf{Python} and \textbf{Spark} to process sensor data at terabyte-level scale for analytics and forecasting.
+        \item Created \textbf{self-service ETL tools} for automated ingestion, validation, and transformation, reducing engineering effort by 40\%.
+    \end{highlights}
+\end{onecolentry}
+\vspace{0.2 cm}
+
+
+\section{Education}
+
+        \begin{twocolentry}{
+        }
+            \textbf{University of Alabama at Birmingham}, BS in Computer Science, Minor in Philosophy\end{twocolentry}
+        \vspace{0.10 cm}
+    \section{Technologies}
+\begin{onecolentry}
+    \textbf{Languages}: Python, SQL, Bash, Golang \\
+    \textbf{Data \& Analytics}: PySpark, PyTorch, LangChain, Airflow, NumPy, Databricks, Spark, Pandas, Polars, PostgreSQL, pgvector, Power BI, Grafana \\
+    \textbf{Cloud \& Platforms}: AWS (S3, Lambda, SageMaker), Databricks, Snowflake, Azure (Data Lake, OpenAI), GCP \\
+    \textbf{CI/CD \& DevOps}: GitHub Actions, GitLab CI/CD, Azure DevOps, Docker, Kubernetes, Terraform \\
+    \textbf{Monitoring \& Visualization}: Grafana, Power BI, Prometheus, Azure Monitor, Panel
+\end{onecolentry}
+
+
+\end{document}
